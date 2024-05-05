@@ -1,0 +1,66 @@
+-- Table structure for table `area`
+CREATE TABLE area (
+  area_id NUMBER(11) PRIMARY KEY,
+  area_name VARCHAR2(50) NOT NULL,
+  area_code VARCHAR2(10) NOT NULL
+);
+
+-- Table structure for table `categories`
+CREATE TABLE categories (
+  cat_id NUMBER(11) PRIMARY KEY,
+  cat_name VARCHAR2(25) NOT NULL,
+  cat_details VARCHAR2(255)
+);
+
+-- Table structure for table `party`
+CREATE TABLE party (
+  party_id NUMBER(11) PRIMARY KEY,
+  party_name VARCHAR2(50) NOT NULL,
+  party_type VARCHAR2(10) NOT NULL, -- 'Manufacturer' or 'Distributor'
+  party_email VARCHAR2(50),
+  party_phone VARCHAR2(10) NOT NULL,
+  party_address VARCHAR2(200)
+);
+
+-- Table structure for table `product`
+CREATE TABLE product (
+  product_id NUMBER(11) PRIMARY KEY,
+  product_name VARCHAR2(50) NOT NULL,
+  product_desc VARCHAR2(255),
+  product_price DECIMAL(10,3) NOT NULL,
+  unit VARCHAR2(10) NOT NULL, -- e.g., 'PCS', 'KG', 'LTR'
+  category_id NUMBER(11) NOT NULL,
+  quantity NUMBER(6),
+  CONSTRAINT product_fk_category FOREIGN KEY (category_id) REFERENCES categories(cat_id)
+);
+
+-- Table structure for table `party_product`
+CREATE TABLE party_product (
+  party_product_id NUMBER(11) PRIMARY KEY,
+  party_id NUMBER(11) NOT NULL,
+  product_id NUMBER(11) NOT NULL,
+  price DECIMAL(10,3) NOT NULL,
+  CONSTRAINT party_product_fk_party FOREIGN KEY (party_id) REFERENCES party(party_id),
+  CONSTRAINT party_product_fk_product FOREIGN KEY (product_id) REFERENCES product(product_id)
+);
+
+-- Table structure for table `order`
+CREATE TABLE order (
+  order_id NUMBER(11) PRIMARY KEY,
+  order_date DATE NOT NULL,
+  party_id NUMBER(11) NOT NULL,
+  approved NUMBER(1) NOT NULL,
+  status NUMBER(1) NOT NULL,
+  total_amount DECIMAL(10,3) NOT NULL,
+  CONSTRAINT order_fk_party FOREIGN KEY (party_id) REFERENCES party(party_id)
+);
+
+-- Table structure for table `order_item`
+CREATE TABLE order_item (
+  order_item_id NUMBER(11) PRIMARY KEY,
+  order_id NUMBER(11) NOT NULL,
+  product_id NUMBER(11) NOT NULL,
+  quantity NUMBER(6) NOT NULL,
+  CONSTRAINT order_item_fk_order FOREIGN KEY (order_id) REFERENCES order(order_id),
+  CONSTRAINT order_item_fk_product FOREIGN KEY (product_id) REFERENCES product(product_id)
+);
