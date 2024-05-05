@@ -1,0 +1,101 @@
+-- Insert data into the area table
+DECLARE
+BEGIN
+  INSERT INTO area (area_id, area_name, area_code) VALUES (1, 'Indore', 'INDR');
+  INSERT INTO area (area_id, area_name, area_code) VALUES (2, 'Allahabad', 'ALBD');
+  INSERT INTO area (area_id, area_name, area_code) VALUES (3, 'Bhopal', 'BPL');
+  INSERT INTO area (area_id, area_name, area_code) VALUES (4, 'Ujjain', 'UJN');
+  INSERT INTO area (area_id, area_name, area_code) VALUES (5, 'Vijaynagar', 'VJN');
+END;
+/
+
+-- Insert data into the categories table
+DECLARE
+BEGIN
+  INSERT INTO categories (cat_id, cat_name, cat_details) VALUES (1, 'Fast Food', NULL);
+  INSERT INTO categories (cat_id, cat_name, cat_details) VALUES (2, 'Bread Buns', NULL);
+  INSERT INTO categories (cat_id, cat_name, cat_details) VALUES (3, 'Counter Cakes', NULL);
+  INSERT INTO categories (cat_id, cat_name, cat_details) VALUES (4, 'Deserts', NULL);
+  INSERT INTO categories (cat_id, cat_name, cat_details) VALUES (5, 'Pastry Rs - 55', NULL);
+  INSERT INTO categories (cat_id, cat_name, cat_details) VALUES (6, 'Pastry Rs - 60', NULL);
+  INSERT INTO categories (cat_id, cat_name, cat_details) VALUES (7, 'Pastry Rs - 65', NULL);
+  INSERT INTO categories (cat_id, cat_name, cat_details) VALUES (8, 'Pastry Rs - 70', NULL);
+  INSERT INTO categories (cat_id, cat_name, cat_details) VALUES (9, 'Add On Items', NULL);
+  INSERT INTO categories (cat_id, cat_name, cat_details) VALUES (10, 'Cakes', NULL);
+  INSERT INTO categories (cat_id, cat_name, cat_details) VALUES (11, 'Cheese Cake', NULL);
+END;
+/
+
+-- Insert data into the party table (manufacturer and distributor)
+DECLARE
+BEGIN
+  -- Manufacturers
+  INSERT INTO party (party_id, party_name, party_type, party_email, party_phone, party_address)
+  VALUES (1, 'Chetan Patidar', 'Manufacturer', 'chetanmpatidar100@gmail.com', '9926411494', NULL);
+
+  INSERT INTO party (party_id, party_name, party_type, party_email, party_phone, party_address)
+  VALUES (2, 'Amin Choudhary', 'Manufacturer', 'aminc@gmail.com', '8980956231', NULL);
+
+  -- Distributors
+  INSERT INTO party (party_id, party_name, party_type, party_email, party_phone, party_address)
+  VALUES (3, 'Nishant Shah', 'Distributor', 'nishant45@gmail.com', '8980769792', 'Alpha Mall, Vastrapur, Ahmedabad');
+
+  INSERT INTO party (party_id, party_name, party_type, party_email, party_phone, party_address)
+  VALUES (4, 'Rahul Pandey', 'Distributor', 'rahul431@gmail.com', '9099432197', 'Gota, S.G. Highway, Ahmedabad');
+
+  INSERT INTO party (party_id, party_name, party_type, party_email, party_phone, party_address)
+  VALUES (5, 'Pawan Panchal', 'Distributor', 'pawan.rocks@gmail.com', '7878025437', 'Modhera Stadium, Ahmedabad');
+
+  INSERT INTO party (party_id, party_name, party_type, party_email, party_phone, party_address)
+  VALUES (6, 'Pushpak Patel', 'Distributor', 'pushpak@gmail.com', '9012376544', 'Navrangpura, Ahmedabad');
+
+  INSERT INTO party (party_id, party_name, party_type, party_email, party_phone, party_address)
+  VALUES (7, 'Haniket Patel', 'Distributor', 'hanipatel@gmail.com', '8980745372', 'CTM, Ahmedabad');
+END;
+/
+
+-- Insert data into the product table
+DECLARE
+BEGIN
+  INSERT INTO product (product_id, product_name, product_desc, product_price, unit, category_id, quantity)
+  VALUES (1, 'Butter Puff', NULL, 16.670, 'PCS', 1, NULL);
+
+  INSERT INTO product (product_id, product_name, product_desc, product_price, unit, category_id, quantity)
+  VALUES (2, 'Corn Puff', NULL, 16.670, 'PCS', 1, NULL);
+
+  -- Insert more product data here
+END;
+/
+
+-- Insert data into the party_product table
+DECLARE
+BEGIN
+  INSERT INTO party_product (party_product_id, party_id, product_id, price)
+  VALUES (1, 1, 1, 16.670);
+
+  INSERT INTO party_product (party_product_id, party_id, product_id, price)
+  VALUES (2, 1, 2, 16.670);
+
+  -- Insert more party_product data here
+END;
+/
+
+-- Insert data into the order table
+DECLARE
+BEGIN
+  INSERT INTO "order" (order_id, order_date, party_id, approved, status, total_amount)
+  VALUES (1, TO_DATE('2021-04-28', 'YYYY-MM-DD'), 2, 1, 1, 4780.150);
+
+  -- Insert more order data here
+END;
+/
+
+-- Insert data into the order_item table
+DECLARE
+BEGIN
+  INSERT INTO order_item (order_item_id, order_id, product_id, quantity)
+  VALUES (1, 1, 1, 20);
+
+  -- Insert more order_item data here
+END;
+/
